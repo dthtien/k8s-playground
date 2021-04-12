@@ -21,6 +21,10 @@ spec:
             secretKeyRef:
               name: rails-secrets
               key: rails_master_key
+        - name: DATABASE_URL
+          value: 'postgres://pahxehwy:pLgqDscJ3p3dT7Y7oTu5XQK7_HHCKNf9@john.db.elephantsql.com:5432/pahxehwy'
+        - name: REDIS_URL
+          value: 'redis-10812.c261.us-east-1-4.ec2.cloud.redislabs.com:10812'
         envFrom:
         - configMapRef:
           name: env

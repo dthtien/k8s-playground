@@ -2,20 +2,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: sidekiq
-  spec:
-    replicas: 2
-    selector:
-      matchLabels:
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sidekiq
+  template:
+    metadata:
+      labels:
         app: sidekiq
-
-    template:
-      metadata:
-        labels:
-          app: sidekiq
-
-      spec:
-        containers:
-        - name: sidekiq
-          image: dthtien/k8s-playaround:latest
-          command: ["sidekiq"]
-          arguments: ["-c", "config/sidekiq.yml"]
+    spec:
+      containers:
+      - name: sidekiq
+        image: dthtien/k8s-playaround:latest
+        command: ["sidekiq"]
+        env:
+        - name: REDIS_URL
+          value: 'redis-10812.c261.us-east-1-4.ec2.cloud.redislabs.com:10812'
