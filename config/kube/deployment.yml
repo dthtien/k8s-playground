@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-playaround-development
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: main-app
+  template:
+    metadata:
+      labels:
+        app: main-app
+    spec:
+      containers:
+      - name: main-app
+        image: dthtien/k8s-playaround
+        env:
+        - name: RAILS_MASTER_KEY
+          valueFrom:
+            secretKeyRef:
+              name: rails-secrets
+              key: rails_master_key
+        envFrom:
+        - configMapRef:
+          name: env
+        ports:
+        - containerPort: 3000
+

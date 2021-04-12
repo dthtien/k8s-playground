@@ -12,6 +12,7 @@
 
   <body>
     <p> Practice </p>
+    <%= Rails.application.credentials.secret_key_base %>
     <%= yield %>
   </body>
 </html>
